@@ -1,3 +1,4 @@
+import java.util.*;
 class Main {
   
 }
@@ -8,4 +9,14 @@ class Password {
     private String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private String nums  = "0123456789";
     private String special="!@#$%^&*()-=_+;':\"[]{},./<>?\\";
+
+    private String password = "";
+
+    Password(boolean u, boolean n, boolean s, int len) {
+        char_set.add(lower.toCharArray());
+        if(u) char_set.add(upper.toCharArray());
+        if(n) char_set.add(nums.toCharArray());
+        if(s) char_set.add(special.toCharArray());
+
+    }
 }
