@@ -19,4 +19,11 @@ class Password {
         if(s) char_set.add(special.toCharArray());
 
     }
+    private int random_num(int range) {
+        return (int) (Math.random() * range);
+    }
+
+    public String toString() {
+        return password;
+    }
 }
