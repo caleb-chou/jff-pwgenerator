@@ -17,7 +17,7 @@ class Password {
         if(u) char_set.add(upper.toCharArray());
         if(n) char_set.add(nums.toCharArray());
         if(s) char_set.add(special.toCharArray());
-        generate(len);
+        generate_V2(len);
 
     }
     private int random_num(int range) {
@@ -35,4 +35,34 @@ class Password {
           this.password += "" + this.char_set.get(cat)[random_num(this.char_set.get(cat).length)];
         }
     }
+    private void generate_v2(int len) {
+        int size = char_set.size();
+        double [] weights = new double[size];
+        int i = 0;
+        for( ; i < weights.length; i++) weights[i] = (double)(1/(double)char_set.size());
+        i = 0;
+        double selected;
+        int sc;
+        while( i < len ) {
+          sc = 0;
+          selected = Math.random();
+          double temp = 0;
+          for(double d : weights) {
+            temp+=d;
+            if(!(selected <= temp)) {
+              sc++;
+              continue;
+            }
+            this.password += "" + this.char_set.get(sc)[random_num(this.char_set.get(sc).length)];
+            for(int j = 0; j < weights.length; j++) {
+              double val = (double) ( 1 / (double) (len-this.password.length()));
+              if(j == sc) weights[j] -= val;
+              else weights[j] += val/(double) 3;
+            }
+            break;
+          }
+          i++;
+        }
+        System.out.println();
+      }
 }
