@@ -26,8 +26,8 @@ class password_gen:
         return self.password
 
     def generate(self):
-        if(self.length > len(self.pool)):
-            while len(password) < length:
+        if(self.length >= len(self.pool)):
+            while len(self.password) < self.length:
                 threshold = random.random()
                 z = self.count_zero()
                 val = 0
@@ -36,9 +36,9 @@ class password_gen:
                     val += k.getData()
                     if val > threshold:
                         cs = k
-                        password += cs.getSet()[random.randint(0,len(k.getSet())-1)]
+                        self.password += cs.getSet()[random.randint(0,len(k.getSet())-1)]
                         break
-                new_weight = cs.getData() * (1.0/(length-len(self.pool)+1))
+                new_weight = cs.getData() * (1.0/(self.length-len(self.pool)+1))
                 for k in self.pool:
                     if k == cs:
                         k.updateData(k.getData()-new_weight)
@@ -74,5 +74,23 @@ class char_set:
     def updateData(self,data):
         self.info[self.key] = data
 
-p = password_gen(True,True,False,1)
+p = password_gen(True,True,True,4)
+p.generate()
 print (p)
+'''
+num_pw = int(input('How many passwords to generate?'))
+if num_pw == None or num_pw < 1:
+    num_pw = 999
+
+
+#p = password_gen(True,True,True,12)
+
+for i in range(num_pw):
+    
+    p.generate()
+    print (p)
+    
+    something = input()
+    if something == 'quit' or something == 'q':
+        break
+'''
