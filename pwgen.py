@@ -26,6 +26,7 @@ class password_gen:
         return self.password
 
     def generate(self):
+        self.password = ''
         if(self.length >= len(self.pool)):
             while len(self.password) < self.length:
                 threshold = random.random()
@@ -74,23 +75,17 @@ class char_set:
     def updateData(self,data):
         self.info[self.key] = data
 
-p = password_gen(True,True,True,4)
-p.generate()
-print (p)
-'''
-num_pw = int(input('How many passwords to generate?'))
-if num_pw == None or num_pw < 1:
+p = password_gen(True,True,True,12)
+
+try:
+    num_pw = int(input('How many passwords to generate? '))
+except Exception:
     num_pw = 999
-
-
-#p = password_gen(True,True,True,12)
-
 for i in range(num_pw):
     
     p.generate()
     print (p)
     
-    something = input()
+    something = input('Type \'q\' or \'quit\' to exit')
     if something == 'quit' or something == 'q':
         break
-'''
